@@ -4,7 +4,6 @@ const categoryController = require("../../controllers/CategoryController");
 const multer = require("multer");
 
 // multer config :
-// multer config :
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, "./temp/uploads/images");

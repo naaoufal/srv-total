@@ -15,6 +15,7 @@ app.use(cors());
 
 // declaring url endpoints :
 app.use("/api/categories", require("./container/routes/CategoryRoute"));
+app.use("/api/clients", require("./container/routes/ClientRoute"));
 
 // start the server
 server.listen(3001, () => {

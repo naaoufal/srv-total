@@ -16,8 +16,8 @@ const fetchGategories = async (req, res) => {
 const getCategoryById = async (req, res) => {
   try {
     // console.log("this is find by ID");
-    const element = await Category.findById(req.params.id);
-    res.json(element);
+    const category = await Category.findById(req.params.id);
+    res.json(category);
   } catch (err) {
     res.json({ message: err.message });
   }
