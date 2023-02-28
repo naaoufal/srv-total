@@ -1,6 +1,9 @@
 const Client = require("../../models/ClientModel");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
+const bcrypt = require("bcrypt");
+
+const saltRounds = 10;
 
 // Get all clients:
 const fetchClients = async (req, res) => {
@@ -14,19 +17,23 @@ const fetchClients = async (req, res) => {
 
 // Add new client :
 const addClient = async (req, res) => {
-  const client = new Client({
-    firstName: req.body.firstName,
-    lastName: req.body.lastName,
-    image: req.file.filename,
-    phone: req.body.phone,
-    isValid: false,
+  bcrypt.hash(req.body.password, saltRounds, async (err, hash) => {
+    console.log("this is hash :", hash, err);
+    const client = new Client({
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      image: req.file.filename,
+      phone: req.body.phone,
+      password: hash,
+      isValid: false,
+    });
+    try {
+      const newClient = await client.save();
+      res.json(newClient);
+    } catch (err) {
+      res.json({ message: err.message });
+    }
   });
-  try {
-    const newClient = await client.save();
-    res.json(newClient);
-  } catch (err) {
-    res.json({ message: err.message });
-  }
 };
 
 // update client by ID :
@@ -50,6 +57,27 @@ const updateClient = async (req, res) => {
 const deleteClient = async (req, res) => {
   Client.findByIdAndDelete(req.params.id).then(() => {
     res.json({ message: "Client Deleted Successfuly" });
+  });
+};
+
+// auth a client (Json Web Token) :
+const clientAuth = async (req, res, next) => {
+  const { email, password } = req.body;
+  Client.findOne({
+    email: email,
+    password: password,
+  }).then((client) => {
+    if (!client) {
+      res.json({ message: "You re Not Allowed" });
+    } else {
+      const email = req.body.email;
+      const password = req.body.password;
+      const cl = { clemail: email, clpassword: password };
+      const accessToken = jwt.sign(cl, process.env.ACCESS_TOKEN_CLIENT);
+      res.json({ accessToken: accessToken });
+      res.cl = cl;
+      next();
+    }
   });
 };
 
