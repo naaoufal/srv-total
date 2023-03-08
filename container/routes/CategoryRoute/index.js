@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const categoryController = require("../../controllers/CategoryController");
 const multer = require("multer");
+const clientAccess = require("../../middlewares/ClientMiddleware");
 
 // multer config :
 var storage = multer.diskStorage({
@@ -15,9 +16,13 @@ var storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-router.get("/getCategories", categoryController.fetchGategories);
+router.get("/getCategories", clientAccess, categoryController.fetchGategories);
 
-router.get("/getCategoryById/:id", categoryController.getCategoryById);
+router.get(
+  "/getCategoryById/:id",
+  clientAccess,
+  categoryController.getCategoryById
+);
 
 router.post(
   "/addCategory",

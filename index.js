@@ -14,8 +14,8 @@ app.use(express.json());
 app.use(cors());
 
 // declaring url endpoints :
-app.use("/api/categories", require("./container/routes/CategoryRoute"));
-app.use("/api/clients", require("./container/routes/ClientRoute"));
+app.use("/api/v1/categories", require("./container/routes/CategoryRoute"));
+app.use("/api/v1/clients", require("./container/routes/ClientRoute"));
 
 // start the server
 server.listen(3001, () => {
