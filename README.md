@@ -1,7 +1,6 @@
 # API DOCUMENTATION :
 
-- partie admin :
+<h2> partie admin : </h2>
 
-  # POST http://localhost:3001/api/v1/admins/addAdmin
-
-  # POST http://localhost:3001/api/v1/admins/authAdmin
+<span> POST http://localhost:3001/api/v1/admins/addAdmin </span>
+<span> POST http://localhost:3001/api/v1/admins/authAdmin </span>
