@@ -1,6 +1,6 @@
 require("dotenv").config();
 const jwt = require("jsonwebtoken");
-const Client = require("../../models/ClientModel");
+const Admin = require("../../models/AdminModel");
 
 module.exports = function auth(req, res, next) {
   const autHeader = req.headers["authorization"];
@@ -10,12 +10,12 @@ module.exports = function auth(req, res, next) {
     return res.sendStatus(403);
   }
 
-  const code = jwt.verify(token, process.env.ACCESS_TOKEN_CLIENT);
-  const client = Client.findById(code.id);
+  const code = jwt.verify(token, process.env.ACCESS_TOKEN_ADMIN);
+  const admin = Admin.findById(code.id);
 
-  if (!client) {
+  if (!admin) {
     return res.sendStatus(404);
   }
-  req.client = client;
+  req.admin = admin;
   next();
 };
