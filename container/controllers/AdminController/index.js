@@ -8,11 +8,11 @@ const saltRounds = 10;
 
 // add new admin
 const addAdmin = async (req, res) => {
-  bcrypt.hash(req.body.password, saltRounds, async () => {
+  bcrypt.hash(req.body.password, saltRounds, async (err, hash) => {
     const admin = new Admin({
       name: req.body.name,
       email: req.body.email,
-      password: req.body.password,
+      password: hash, //req.body.password,
     });
     try {
       const newAdmin = await admin.save();

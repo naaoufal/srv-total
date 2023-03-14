@@ -87,10 +87,21 @@ const clientAuth = async (req, res, next) => {
   });
 };
 
+// Get client by ID :
+const getClientById = async (req, res) => {
+  try {
+    const client = await Client.findById(req.params.id);
+    res.json(client);
+  } catch (error) {
+    res.json({ message: error.message });
+  }
+};
+
 module.exports = {
   fetchClients,
   addClient,
   updateClient,
   deleteClient,
   clientAuth,
+  getClientById,
 };

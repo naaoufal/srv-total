@@ -3,6 +3,7 @@ const router = express.Router();
 const clientController = require("../../controllers/ClientController");
 const multer = require("multer");
 const clientAccess = require("../../middlewares/ClientMiddleware");
+const adminAccess = require("../../middlewares/AdminMiddleware");
 
 // multer config :
 var storage = multer.diskStorage({
@@ -16,13 +17,15 @@ var storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-router.get("/getClients", clientController.fetchClients);
+router.get("/getClients", adminAccess, clientController.fetchClients);
+
+router.get("/getClientById/:id", clientAccess, clientController.getClientById);
 
 router.post("/addClient", upload.single("image"), clientController.addClient);
 
-router.patch("/updateClient", clientAccess, clientController.updateClient);
+router.patch("/updateClient/:id", clientAccess, clientController.updateClient);
 
-router.patch("/deleteClient", clientAccess, clientController.deleteClient);
+router.delete("/deleteClient/:id", clientAccess, clientController.deleteClient);
 
 router.post("/authClient", clientController.clientAuth);
 
