@@ -31,6 +31,10 @@ const clientSchema = new mongoose.Schema({
     type: Boolean,
     required: true,
   },
+  createdAt: {
+    type: Date,
+    required: true,
+  },
 });
 
 module.exports = mongoose.model("clients", clientSchema);

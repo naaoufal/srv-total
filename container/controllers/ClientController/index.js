@@ -26,6 +26,7 @@ const addClient = async (req, res) => {
       email: req.body.email,
       password: hash,
       isValid: false,
+      createdAt: Date.now(),
     });
     try {
       const newClient = await client.save();

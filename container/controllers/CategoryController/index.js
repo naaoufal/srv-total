@@ -28,6 +28,7 @@ const addCategory = async (req, res) => {
   const category = new Category({
     name: req.body.name,
     image: req.file.filename,
+    createdAt: Date.now(),
   });
   try {
     const newCategory = await category.save();

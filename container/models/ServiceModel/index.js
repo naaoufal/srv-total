@@ -2,8 +2,12 @@ const mongoose = require("mongoose");
 
 // categories model :
 
-const categorySchema = new mongoose.Schema({
+const serviceSchema = new mongoose.Schema({
   name: {
+    type: String,
+    required: true,
+  },
+  description: {
     type: String,
     required: true,
   },
@@ -17,4 +21,4 @@ const categorySchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("categories", categorySchema);
+module.exports = mongoose.model("service", serviceSchema);
