@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const serviceController = require("../../controllers/ServiceController");
 const multer = require("multer");
+const adminAccess = require("../../middlewares/AdminMiddleware");
 
 // multer config :
 var storage = multer.diskStorage({
@@ -18,7 +19,23 @@ const upload = multer({ storage: storage });
 router.post(
   "/addService",
   upload.single("image"),
+  // adminAccess,
   serviceController.addService
+);
+
+router.get("/getServices", serviceController.getServices);
+
+router.patch(
+  "/updateService/:id",
+  // adminAccess,
+  upload.single("image"),
+  serviceController.updateService
+);
+
+router.delete(
+  "/deleteService/:id",
+  // adminAccess,
+  serviceController.deleteService
 );
 
 module.exports = router;

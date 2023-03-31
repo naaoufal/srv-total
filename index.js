@@ -18,6 +18,7 @@ app.use("/api/v1/admins", require("./container/routes/AdminRoute"));
 app.use("/api/v1/services", require("./container/routes/ServiceRoute"));
 app.use("/api/v1/categories", require("./container/routes/CategoryRoute"));
 app.use("/api/v1/clients", require("./container/routes/ClientRoute"));
+app.use("/api/v1/vehicules", require("./container/routes/VehiculeRoute"));
 
 // start the server
 server.listen(3001, () => {

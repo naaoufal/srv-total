@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 // bikes model :
 
-const bikeSchema = new mongoose.Schema({
+const vehiculeSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
@@ -16,11 +16,11 @@ const bikeSchema = new mongoose.Schema({
     required: true,
   },
   serviceId: {
-    type: mongoose.ObjectId(),
+    type: mongoose.Schema.ObjectId,
     required: true,
   },
   categoryId: {
-    type: mongoose.ObjectId(),
+    type: mongoose.Schema.ObjectId,
     required: true,
   },
   image: {
@@ -33,4 +33,4 @@ const bikeSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("bikes", bikeSchema);
+module.exports = mongoose.model("vehicules", vehiculeSchema);
