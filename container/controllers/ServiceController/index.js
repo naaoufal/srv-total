@@ -31,6 +31,16 @@ const getServices = async (req, res) => {
   }
 };
 
+// get service by ID :
+const getServiceById = async () => {
+  try {
+    const service = await Service.findById(req.params.id);
+    res.json(service);
+  } catch (error) {
+    res.json({ message: error.message });
+  }
+};
+
 // update service by ID :
 const updateService = async (req, res) => {
   if (!req.body) {
@@ -60,4 +70,5 @@ module.exports = {
   getServices,
   updateService,
   deleteService,
+  getServiceById,
 };

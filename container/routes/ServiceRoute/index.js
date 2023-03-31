@@ -38,4 +38,6 @@ router.delete(
   serviceController.deleteService
 );
 
+router.get("/getServiceById/:id", serviceController.getServiceById);
+
 module.exports = router;
